@@ -5,8 +5,10 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 1. What was broken when you started?
 
 - What did the game look like the first time you ran it?
+Whenever I started the number of attempts did not match attempts left.
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
+It said I had already used 1 attempt, when I didn't. The secret number didn't change even though it was out of range for that difficulty. The range of the numbers didn't change with the difficulty. Sometimes it tells me to go lower even though the number is higher than the number I inputted. It said I'm out of attempts whenever I still have 1 attempt left. When I click new game, the history of my attempts doesn't get cleared and it doesn't let me input any new attempts.
 
 ---
 
