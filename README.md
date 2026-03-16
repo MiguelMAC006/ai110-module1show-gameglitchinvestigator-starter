@@ -25,13 +25,13 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+This is a Streamlit number guessing game where the player picks a difficulty and tries to guess a secret number within a limited number of attempts, guided by "Too High" / "Too Low" hints.
+
+I found and fixed six bugs with the help of Claude Code: the hint directions ("Go HIGHER!" / "Go LOWER!") were swapped; the secret number was alternately cast to a string on even attempts, breaking numeric comparisons; the attempt counter was initialized to 1 instead of 0; the hint UI text hardcoded "1 to 100" regardless of difficulty; the secret wasn't regenerated when difficulty changed mid-session; and "New Game" didn't clear history or reset game status. Claude Code traced each bug, applied the fixes, and generated pytest cases in `tests/test_game_logic.py` to verify them.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+![](./guess_game_win_ss.png)
 
 ## 🚀 Stretch Features
 
