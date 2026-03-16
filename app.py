@@ -27,6 +27,8 @@ low, high = get_range_for_difficulty(difficulty)
 st.sidebar.caption(f"Range: {low} to {high}")
 st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 
+# FIX: Secret was never regenerated when the player changed difficulty mid-session.
+# Claude Code identified the missing difficulty-change check and added current_difficulty tracking.
 # Regenerate secret if difficulty changed or if starting fresh
 if "current_difficulty" not in st.session_state:
     st.session_state.current_difficulty = difficulty
@@ -37,6 +39,8 @@ elif st.session_state.current_difficulty != difficulty:
 elif "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
+# FIX: attempts was initialized to 1 instead of 0, causing the first guess to count as attempt #2.
+# Caught by Claude Code while reviewing session state initialization.
 if "attempts" not in st.session_state:
     st.session_state.attempts = 0
 
@@ -51,6 +55,8 @@ if "history" not in st.session_state:
 
 st.subheader("Make a guess")
 
+# FIX: Hint text was hardcoded to "1 and 100" regardless of difficulty.
+# Claude Code spotted the mismatch between the dynamic range and the static UI string.
 st.info(
     f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
@@ -79,7 +85,7 @@ with col3:
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(low, high)
-    st.session_state.history = []
+    st.session_state.history = []  # FIX: New Game didn't clear history or reset status. Claude Code added these resets.
     st.session_state.status = "playing"
     st.success("New game started.")
     st.rerun()
@@ -102,6 +108,8 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
+        # FIX: Secret was alternately cast to str() on even attempts, breaking integer comparisons.
+        # Claude Code traced the alternating str/int bug in app.py and removed the type coercion entirely.
         outcome, message = check_guess(guess_int, st.session_state.secret)
 
         if show_hint:

@@ -41,6 +41,8 @@ def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
 
+    # FIX: Hint messages were swapped — "Go HIGHER!" and "Go LOWER!" were reversed.
+    # Identified the bug by reading the original app.py logic with Claude Code, then corrected the directions.
     try:
         if guess > secret:
             return "Too High", "📈 Go LOWER!"
